@@ -79,6 +79,13 @@ namespace DFAssist.Helpers
         protected override void OnSendNotification(string title, string message, string testing)
         {
             var proc = FFXIVNetworkProcessHelper.Instance.ActiveProcess;
+
+            if (!MainControl.FlashTaskbar.Checked)
+            {
+                Logger.Write("UI: FlashTaskbar is disabled", LogLevel.Debug);
+                return;
+            }
+
             if (proc != null)
             {
                 FlashWindowEx(proc.MainWindowHandle);
